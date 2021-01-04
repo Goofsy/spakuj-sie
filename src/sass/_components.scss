@@ -1,3 +1,128 @@
-@import "base";
-@import "components";
-@import "layout";
+// Navbar
+.navbar {
+  background-color: $primary-color;
+  &__title {
+    color: $light-color;
+    font-size: 2.5rem;
+    padding: 1.7rem 0;
+  }
+}
+
+// Form
+.form {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0 2rem 0;
+  background-color: $light-color;
+  width: 80%;
+  margin: 2rem auto;
+  border-radius: 0.5rem;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+  }
+}
+
+// Buttons
+.btn {
+  cursor: pointer;
+  background-color: $light-color;
+  border: 1.5px solid $primary-color;
+  border-radius: 4px;
+  outline: none;
+  font-size: 1rem;
+  height: 3rem;
+  padding: 0 1rem;
+  margin-top: 18px;
+
+  transition: all 0.5s ease;
+
+  &:hover {
+    background-color: $primary-color;
+    color: $light-color;
+  }
+
+  &--confirm {
+    height: 2.5rem;
+  }
+
+  &--list {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 1rem;
+
+    &--edit {
+      color: $primary-color;
+    }
+
+    &--delete {
+      color: $error-color;
+    }
+  }
+}
+
+// Inputs
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.input {
+  outline: none;
+  height: 3rem;
+  width: 12rem;
+  font-size: 1rem;
+  border: 1px solid $dark-color;
+  border-radius: 4px;
+  padding: 0 0.5rem;
+  transition: border 0.5s ease;
+  background-color: $light-color;
+
+  &:hover {
+    border: 1px solid $primary-color;
+  }
+
+  &:focus {
+    border: 1px solid $primary-color;
+  }
+
+  &--where {
+    width: 250px;
+  }
+
+  &--item {
+    width: 220px;
+    height: 2.5rem;
+  }
+
+  &--cap {
+    width: 120px;
+    height: 2.5rem;
+  }
+}
+
+// Arrows
+.arrow {
+  border: solid $dark-color;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+
+  &--down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    position: absolute;
+    top: 0.4rem;
+    right: 0.5rem;
+    cursor: pointer;
+  }
+}
