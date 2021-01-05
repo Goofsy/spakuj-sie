@@ -154,16 +154,25 @@ class View {
     });
   }
 
+  _setBackpackColor(filledPercentage) {
+    return `linear-gradient(
+      360deg,
+      #3498db 0%,
+      #3498db ${filledPercentage < 70 ? filledPercentage : '70'}%,
+      #F39C12 ${filledPercentage < 70 ? filledPercentage : '70'}%,
+      #F39C12 ${filledPercentage < 90 ? filledPercentage : '90'}%,
+      #C0392B ${filledPercentage < 90 ? filledPercentage : '90'}%,
+      #C0392B ${filledPercentage < 100 ? filledPercentage : '100'}%,
+      #FFFFFF ${filledPercentage}%
+    )`;
+  }
+
   renderBackpack({ title, cap, filledCap, filledPercentage }) {
     this._backpackTitle.innerHTML = title;
     this._backpackCap.innerHTML = `${filledCap}/${cap}L`;
-    this._backpackImgOverlay.style.background = `linear-gradient(
-      360deg,
-      #3498db 0%,
-      #3498db ${filledPercentage}%,
-      white ${filledPercentage}%,
-      white 100%
-    )`;
+    this._backpackImgOverlay.style.background = this._setBackpackColor(
+      filledPercentage
+    );
   }
 
   // Init Form
