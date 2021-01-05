@@ -72,7 +72,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
@@ -104,7 +104,7 @@ input[type="number"] {
     height: 2.5rem;
   }
 
-  &--cap {
+  &--item-cap {
     width: 120px;
     height: 2.5rem;
   }
