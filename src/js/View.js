@@ -1,5 +1,3 @@
-import { fill } from 'core-js/fn/array';
-
 class View {
   _initialForm = document.querySelector('.initial-form');
   _btnInitForm = document.querySelector('.btn--init');
@@ -14,15 +12,90 @@ class View {
   _backpackInputItemCap = document.querySelector('.input--item-cap');
   _backpackFormBtn = document.querySelector('.btn--confirm');
   _backpackList = document.querySelector('.list');
-  constructor() {}
 
-  // Backpack List
+  constructor() {
+    this._handlerOpenEditForm();
+    this._handlerCloseEditForm();
+  }
+
+  addHandlerEditItem(handler) {
+    this._backpackList.addEventListener('click', e => {
+      e.preventDefault();
+      if (!e.target.closest('.btn--edit--confirm')) return;
+      const form = e.target.closest('.form--edit-item');
+      const itemName = form.querySelector('.input--edit--item').value;
+      const itemCap = form.querySelector('.input--edit--cap').value;
+      const itemId = form.dataset.id;
+      handler(itemName, itemCap, itemId);
+      this._closeEditForm();
+    });
+  }
+
+  _closeEditForm() {
+    document.querySelectorAll('.item').forEach(e => {
+      e.style.display = 'flex';
+    });
+    if (document.querySelector('.form--edit-item')) {
+      document.querySelector('.form--edit-item').remove();
+    }
+  }
+
+  _handlerCloseEditForm() {
+    this._backpackList.addEventListener('click', e => {
+      e.preventDefault();
+      if (!e.target.closest('.btn--edit--cancel')) return;
+      this._closeEditForm();
+    });
+  }
+
+  _createEditForm(itemName, itemCap, itemId) {
+    return `
+      <form class="form form--edit-item" autocomplete="off" novalidate data-id=${itemId}>
+        <div class="form__group">
+          <input
+            type="text"
+            class="input input--edit input--edit--item"
+            value="${itemName}"
+          />
+        </div>
+        <div class="form__group">
+          <input
+            type="number"
+            class="input input--edit input--edit--cap"
+            value="${itemCap}"
+          />
+        </div>
+        <div class="buttons">
+          <button class="btn--edit btn--edit--confirm"><i class="arrow arrow--right"></i></p></button>
+         <button class="btn--edit btn--edit--cancel">x</button>
+        </div>
+      </form>
+    `;
+  }
+
+  _handlerOpenEditForm() {
+    this._backpackList.addEventListener('click', e => {
+      if (!e.target.closest('.btn--list--edit')) return;
+      this._closeEditForm();
+      const listItem = e.target.closest('.list__item');
+      const itemName = listItem.querySelector('.item-name').innerHTML;
+      const itemId = listItem.dataset.id;
+      const itemCap = listItem
+        .querySelector('.item-cap')
+        .innerHTML.slice(0, -1);
+      listItem.insertAdjacentHTML(
+        'beforeend',
+        this._createEditForm(itemName, itemCap, itemId)
+      );
+      listItem.querySelector('.item').style.display = 'none';
+    });
+  }
+
   addHandlerDeleteItem(handler) {
     this._backpackList.addEventListener('click', e => {
       if (!e.target.closest('.btn--list--delete')) return;
       const listItem = e.target.closest('.list__item');
       const id = listItem.dataset.id;
-      listItem.remove();
       handler(id);
     });
   }
@@ -31,19 +104,21 @@ class View {
     this._backpackList.innerHTML = '';
   }
 
-  _createMarkup({ itemName, itemCap, id }) {
+  _createItem({ itemName, itemCap, id }) {
     return `
       <li class="list__item" data-id="${id}">
-        <p>${itemName}</p>
-        <div class="buttons">
-          <button class="btn--list btn--list--edit" title="Edytuj">
-            <i class="far fa-edit fa-lg"></i>
-          </button>
-          <button class="btn--list btn--list--delete" title="Usuń">
-            <i class="far fa-trash-alt fa-lg"></i>
-          </button>
+        <div class="item">
+          <p class="item-name">${itemName}</p>
+          <div class="buttons">
+            <button class="btn--list btn--list--edit" title="Edytuj">
+              <i class="far fa-edit fa-lg"></i>
+            </button>
+            <button class="btn--list btn--list--delete" title="Usuń">
+              <i class="far fa-trash-alt fa-lg"></i>
+            </button>
+          </div>
+          <p class="item-cap">${itemCap}L</p>
         </div>
-        <p>${itemCap}L</p>
       </li>
     `;
   }
@@ -53,7 +128,7 @@ class View {
     list.forEach(item => {
       this._backpackList.insertAdjacentHTML(
         'beforeend',
-        this._createMarkup(item)
+        this._createItem(item)
       );
     });
   }

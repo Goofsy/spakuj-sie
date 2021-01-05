@@ -3,7 +3,15 @@ export const state = {
   backpackList: [],
 };
 
-export const deleteItemFromBackpack = async function (id) {
+export const editItem = async function (itemName, itemCap, itemId) {
+  state.backpackList.forEach((item, i) => {
+    if (item.id !== itemId) return;
+    item.itemName = itemName;
+    item.itemCap = itemCap;
+  });
+};
+
+export const deleteItem = async function (id) {
   state.backpackList.forEach((item, i) => {
     if (item.id !== id) return;
     state.backpackList.splice(i, 1);
@@ -18,11 +26,11 @@ const createItemObject = function ({ itemName, itemCap }) {
   };
 };
 
-export const addItemToBackpack = async function (item) {
+export const addItem = async function (item) {
   state.backpackList.push(createItemObject(item));
 };
 
-export const updateBackpackData = async function () {
+export const updateBackpack = async function () {
   const filledCap = state.backpackList
     .map(item => +Object.values(item)[1])
     .reduce((prev, cur) => prev + cur, 0);
@@ -33,7 +41,7 @@ export const updateBackpackData = async function () {
   ).toFixed(1);
 };
 
-export const createBackpackData = async function (title, cap, filledCap = 0) {
+export const createBackpack = async function (title, cap, filledCap = 0) {
   state.backpackData = {
     title: title.charAt(0).toUpperCase() + title.slice(1),
     cap: +cap,

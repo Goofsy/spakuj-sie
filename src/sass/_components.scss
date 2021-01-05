@@ -18,6 +18,24 @@
   padding: 3rem;
   border-radius: 0.5rem;
 
+  &--add-item {
+    margin: 1.5rem 1.5rem 1.5rem auto;
+    box-shadow: 2px 1px 10px 3px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0 1.5rem 0;
+  }
+
+  &--edit-item {
+    background: none;
+    padding: 0;
+    box-shadow: 0;
+    margin: 0;
+    width: 90%;
+
+    .form__group {
+      height: 41.48px;
+    }
+  }
+
   &__group {
     display: flex;
     flex-direction: column;
@@ -28,7 +46,7 @@
 // Buttons
 .btn {
   cursor: pointer;
-  background-color: $light-color;
+  background-color: transparent;
   border: 1.5px solid $primary-color;
   border-radius: 4px;
   outline: none;
@@ -63,6 +81,28 @@
       color: $error-color;
     }
   }
+
+  &--edit {
+    margin: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-top: 3px;
+    background-color: transparent;
+
+    &--confirm {
+      padding: 0;
+      margin-right: 0.8rem;
+    }
+
+    &--cancel {
+      font-size: 1.7rem;
+      padding: 0;
+      margin-right: 0.2rem;
+
+      color: $error-color;
+    }
+  }
 }
 
 // Inputs
@@ -85,14 +125,14 @@ input[type='number'] {
   border-radius: 4px;
   padding: 0 0.5rem;
   transition: border 0.5s ease;
-  background-color: $light-color;
+  background-color: transparent;
 
   &:hover {
-    border: 1px solid $primary-color;
+    border-color: $primary-color;
   }
 
   &:focus {
-    border: 1px solid $primary-color;
+    border-color: $primary-color;
   }
 
   &--where {
@@ -100,30 +140,42 @@ input[type='number'] {
   }
 
   &--item {
-    width: 220px;
+    width: 245px;
     height: 2.5rem;
   }
 
   &--item-cap {
-    width: 120px;
+    width: 95px;
     height: 2.5rem;
+  }
+
+  &--edit {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $dark-color;
+    border-radius: 0;
+
+    &--item {
+      width: 380px;
+    }
+
+    &--cap {
+      width: 60px;
+    }
   }
 }
 
 // Arrows
 .arrow {
-  border: solid $dark-color;
+  border: solid $primary-color;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
 
-  &--down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    position: absolute;
-    top: 0.4rem;
-    right: 0.5rem;
-    cursor: pointer;
+  &--right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    padding: 5.5px;
   }
 }
 

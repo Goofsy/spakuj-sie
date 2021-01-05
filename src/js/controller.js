@@ -3,21 +3,29 @@ import 'core-js';
 import * as model from './model.js';
 import View from './View.js';
 
+const controlEditItem = async function (itemName, itemCap, itemId) {
+  model.editItem(itemName, itemCap, itemId);
+  renderandUpdate();
+};
+
 const controlDeleteItem = async function (id) {
-  model.deleteItemFromBackpack(id);
-  model.updateBackpackData();
-  View.renderBackpack(model.state.backpackData);
+  model.deleteItem(id);
+  renderandUpdate();
 };
 
 const controlAddItem = async function (data) {
-  model.addItemToBackpack(data);
-  View.renderBackpackList(model.state.backpackList);
-  model.updateBackpackData();
-  View.renderBackpack(model.state.backpackData);
+  model.addItem(data);
+  renderandUpdate();
 };
 
 const controlInitForm = async function ({ title, cap }) {
-  model.createBackpackData(title, cap);
+  model.createBackpack(title, cap);
+  View.renderBackpack(model.state.backpackData);
+};
+
+const renderandUpdate = function () {
+  model.updateBackpack();
+  View.renderBackpackList(model.state.backpackList);
   View.renderBackpack(model.state.backpackData);
 };
 
@@ -25,5 +33,6 @@ const init = function () {
   View.addHandlerInitForm(controlInitForm);
   View.addHandlerBackpackForm(controlAddItem);
   View.addHandlerDeleteItem(controlDeleteItem);
+  View.addHandlerEditItem(controlEditItem);
 };
 init();
