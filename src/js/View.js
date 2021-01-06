@@ -13,11 +13,78 @@ class View {
   _backpackFormBtn = document.querySelector('.btn--confirm');
   _backpackList = document.querySelector('.list');
 
+  _calc = document.querySelector('.calc');
+  _calcOpenBtn = document.querySelector('.btn--calc--open');
+  _calcCloseBtn = document.querySelector('.btn--calc--close');
+  _calcConfirmBtn = document.querySelector('.btn--calc--confirm');
+  _calcInputA = document.querySelector('.input--calc-a');
+  _calcInputB = document.querySelector('.input--calc-b');
+  _calcInputC = document.querySelector('.input--calc-c');
+  _calcResult = document.querySelector('.calc__result');
+
   constructor() {
     this._handlerOpenEditForm();
     this._handlerCloseEditForm();
+    this._handlerOpenCalc();
+    this._handlerCloseCalc();
+    this._handlerCloseCalcByBody();
   }
 
+  // Calculator
+  _clearCalcform() {
+    this._calcInputA.value = '';
+    this._calcInputB.value = '';
+    this._calcInputC.value = '';
+  }
+
+  _getCalcFormData() {
+    return {
+      a: this._calcInputA.value,
+      b: this._calcInputB.value,
+      c: this._calcInputC.value,
+    };
+  }
+
+  addHandlerCalc(handler) {
+    this._calcConfirmBtn.addEventListener('click', e => {
+      e.preventDefault();
+      const cap = handler(this._getCalcFormData());
+      this._calcResult.innerHTML = `${cap}L`;
+      this._calcInputA.focus();
+      this._clearCalcform();
+    });
+  }
+
+  _closeCalc() {
+    this._calc.style.clipPath = 'circle(13% at 83.4% 87%)';
+    this._calcOpenBtn.classList.remove('hidden');
+    this._calcConfirmBtn.style.display = 'none';
+  }
+
+  _handlerCloseCalcByBody() {
+    document.body.addEventListener('click', e => {
+      if (e.target.closest('.calc')) return;
+      this._closeCalc();
+    });
+  }
+
+  _handlerCloseCalc() {
+    this._calcCloseBtn.addEventListener('click', e => {
+      e.preventDefault();
+      this._closeCalc();
+    });
+  }
+
+  _handlerOpenCalc() {
+    this._calcOpenBtn.addEventListener('click', e => {
+      e.preventDefault();
+      this._calc.style.clipPath = 'circle(100%)';
+      this._calcOpenBtn.classList.add('hidden');
+      this._calcConfirmBtn.style.display = 'block';
+    });
+  }
+
+  // Backpack
   addHandlerEditItem(handler) {
     this._backpackList.addEventListener('click', e => {
       e.preventDefault();
@@ -66,7 +133,7 @@ class View {
           />
         </div>
         <div class="buttons">
-          <button class="btn--edit btn--edit--confirm"><i class="arrow arrow--right"></i></p></button>
+          <button class="btn--edit btn--edit--confirm"><i class="arrow arrow--right"></i></button>
          <button class="btn--edit btn--edit--cancel">x</button>
         </div>
       </form>
@@ -155,6 +222,7 @@ class View {
   }
 
   _setBackpackColor(filledPercentage) {
+    if (filledPercentage >= 100) return '#C0392B';
     return `linear-gradient(
       360deg,
       #3498db 0%,

@@ -3,22 +3,26 @@ import 'core-js';
 import * as model from './model.js';
 import View from './View.js';
 
-const controlEditItem = async function (itemName, itemCap, itemId) {
+const controlCalc = function ({ a, b, c }) {
+  return model.calcCap(a, b, c);
+};
+
+const controlEditItem = function (itemName, itemCap, itemId) {
   model.editItem(itemName, itemCap, itemId);
   renderandUpdate();
 };
 
-const controlDeleteItem = async function (id) {
+const controlDeleteItem = function (id) {
   model.deleteItem(id);
   renderandUpdate();
 };
 
-const controlAddItem = async function (data) {
+const controlAddItem = function (data) {
   model.addItem(data);
   renderandUpdate();
 };
 
-const controlInitForm = async function ({ title, cap }) {
+const controlInitForm = function ({ title, cap }) {
   model.createBackpack(title, cap);
   View.renderBackpack(model.state.backpackData);
 };
@@ -34,5 +38,6 @@ const init = function () {
   View.addHandlerBackpackForm(controlAddItem);
   View.addHandlerDeleteItem(controlDeleteItem);
   View.addHandlerEditItem(controlEditItem);
+  View.addHandlerCalc(controlCalc);
 };
 init();

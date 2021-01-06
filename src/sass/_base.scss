@@ -14,10 +14,11 @@ $error-color: rgb(216, 51, 51);
 }
 
 body {
-  max-height: 100vh;
+  min-height: 100vh;
   font-family: sans-serif;
   background-color: $medium-color;
   color: $dark-color;
+  position: relative;
 }
 
 section {

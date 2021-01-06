@@ -3,7 +3,11 @@ export const state = {
   backpackList: [],
 };
 
-export const editItem = async function (itemName, itemCap, itemId) {
+export const calcCap = function (a, b, c) {
+  return ((a * b * c) / 1000).toFixed(2);
+};
+
+export const editItem = function (itemName, itemCap, itemId) {
   state.backpackList.forEach((item, i) => {
     if (item.id !== itemId) return;
     item.itemName = itemName;
@@ -11,7 +15,7 @@ export const editItem = async function (itemName, itemCap, itemId) {
   });
 };
 
-export const deleteItem = async function (id) {
+export const deleteItem = function (id) {
   state.backpackList.forEach((item, i) => {
     if (item.id !== id) return;
     state.backpackList.splice(i, 1);
@@ -26,11 +30,11 @@ const createItemObject = function ({ itemName, itemCap }) {
   };
 };
 
-export const addItem = async function (item) {
+export const addItem = function (item) {
   state.backpackList.push(createItemObject(item));
 };
 
-export const updateBackpack = async function () {
+export const updateBackpack = function () {
   const filledCap = state.backpackList
     .map(item => +Object.values(item)[1])
     .reduce((prev, cur) => prev + cur, 0);
@@ -41,7 +45,7 @@ export const updateBackpack = async function () {
   ).toFixed(1);
 };
 
-export const createBackpack = async function (title, cap, filledCap = 0) {
+export const createBackpack = function (title, cap, filledCap = 0) {
   state.backpackData = {
     title: title.charAt(0).toUpperCase() + title.slice(1),
     cap: +cap,
