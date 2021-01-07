@@ -27,7 +27,7 @@ export const deleteItem = function (id) {
 const createItemObject = function (itemName, itemCap) {
   return {
     itemName: itemName,
-    itemCap: itemCap,
+    itemCap: itemCap.toFixed(1),
     id: '_' + Math.random().toString(36).substr(2, 9),
   };
 };
@@ -49,7 +49,7 @@ export const updateBackpack = function () {
   const filledCap = state.backpackList
     .map(item => +Object.values(item)[1])
     .reduce((prev, cur) => prev + cur, 0);
-  state.backpackData.filledCap = filledCap;
+  state.backpackData.filledCap = filledCap.toFixed(1);
   state.backpackData.filledPercentage = (
     (filledCap / state.backpackData.cap) *
     100
@@ -60,8 +60,8 @@ export const createBackpack = function (t, c) {
   try {
     const title = t.trim();
     errorItemInput(title, 'where');
-    console.log;
     if (c < 1) throw { input: 'size', error: `Minimum 1l` };
+    if (c > 1000) throw { input: 'size', error: `Nie uniesiesz tyle :)` };
 
     state.backpackData = {
       title: title.charAt(0).toUpperCase() + title.slice(1),
@@ -84,6 +84,8 @@ const errorItemCapInput = function (cap, input) {
 const errorItemInput = function (item, input) {
   if (`${item}`.length < 1)
     throw { input: `${input}`, error: 'Pole nie może byc puste' };
+  if (`${item}`.length > 20)
+    throw { input: `${input}`, error: 'Maksymalna ilość znaków: 20' };
   if (/[0-9]+$/.test(`${item}`))
-    throw { input: `${input}`, error: 'Nie może byc cyfra' };
+    throw { input: `${input}`, error: 'Nie może być liczbą' };
 };
