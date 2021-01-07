@@ -45,13 +45,13 @@ class View {
   }
 
   renderError({ input, error }) {
-    console.log(input, error);
+    // console.log(input, error);
     this._hideError();
     const formInput = document.querySelector(`.input--${input}`);
     const formGroup = formInput.parentElement;
     formInput.classList.add('error');
     formGroup.querySelector('.form__error-msg').innerText = error;
-    console.log(formGroup);
+    // console.log(formGroup);
   }
 
   // Calculator
