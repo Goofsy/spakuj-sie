@@ -1,5 +1,7 @@
 export const state = {
-  backpackData: {},
+  backpackData: {
+    cap: 50,
+  },
   backpackList: [],
 };
 
@@ -22,7 +24,7 @@ export const deleteItem = function (id) {
   });
 };
 
-const createItemObject = function ({ itemName, itemCap }) {
+const createItemObject = function (itemName, itemCap) {
   return {
     itemName: itemName,
     itemCap: itemCap,
@@ -30,8 +32,17 @@ const createItemObject = function ({ itemName, itemCap }) {
   };
 };
 
-export const addItem = function (item) {
-  state.backpackList.push(createItemObject(item));
+export const addItem = function (itemName, itemCap) {
+  try {
+    const item = itemName.trim();
+    const cap = +itemCap;
+    errorItemInput(item, 'item');
+    errorItemCapInput(cap, 'item-cap');
+
+    state.backpackList.push(createItemObject(item, cap));
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const updateBackpack = function () {
@@ -48,11 +59,10 @@ export const updateBackpack = function () {
 export const createBackpack = function (t, c) {
   try {
     const title = t.trim();
+    errorItemInput(title, 'where');
+    console.log;
+    if (c < 1) throw { input: 'size', error: `Minimum 1l` };
 
-    if (title.length < 1)
-      throw { input: 'where', error: 'Pole nie może byc puste' };
-    if (c.length < 1) throw { input: 'size', error: 'Pole nie może byc puste' };
-    if (c < 1) throw { input: 'size', error: 'Minimum 1l' };
     state.backpackData = {
       title: title.charAt(0).toUpperCase() + title.slice(1),
       cap: Number.parseFloat(c).toFixed(1),
@@ -62,4 +72,18 @@ export const createBackpack = function (t, c) {
   } catch (err) {
     throw err;
   }
+};
+
+const errorItemCapInput = function (cap, input) {
+  if (cap < 0.1) throw { input: `${input}`, error: `Minimum 0.1l` };
+
+  if (cap + state.backpackData.filledCap > state.backpackData.cap)
+    throw { input: `${input}`, error: 'Nie zmieści się' };
+};
+
+const errorItemInput = function (item, input) {
+  if (`${item}`.length < 1)
+    throw { input: `${input}`, error: 'Pole nie może byc puste' };
+  if (/[0-9]+$/.test(`${item}`))
+    throw { input: `${input}`, error: 'Nie może byc cyfra' };
 };

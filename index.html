@@ -18,7 +18,7 @@
       </div>
     </nav>
     <div class="container">
-      <section class="initial-form">
+      <section class="initial-form hidden">
         <form class="form" autocomplete="off" novalidate>
           <div class="form__group">
             <label for="where">Dokąd się wybierasz?</label>
@@ -28,7 +28,7 @@
               id="where"
               class="input input--where"
             />
-            <p class="form__error-msg"></p>
+            <small class="form__error-msg"></small>
           </div>
           <div class="form__group">
             <label for="size">Objętosc plecaka w litrach</label>
@@ -38,12 +38,12 @@
               id="size"
               class="input input--size"
             />
-            <p class="form__error-msg"></p>
+            <small class="form__error-msg"></small>
           </div>
           <button class="btn btn--init">Potwierdź</button>
         </form>
       </section>
-      <section class="content hidden">
+      <section class="content">
         <div class="backpack">
           <h3 class="backpack__title"></h3>
           <div class="backpack__img">
@@ -62,6 +62,7 @@
                 id="item"
                 class="input input--item"
               />
+              <small class="form__error-msg"></small>
             </div>
             <div class="form__group">
               <label for="cap">Objetosc w l</label>
@@ -71,6 +72,7 @@
                 id="cap"
                 class="input input--item-cap"
               />
+              <small class="form__error-msg"></small>
             </div>
             <button class="btn btn--confirm">Potwierdź</button>
           </form>

@@ -36,17 +36,22 @@ class View {
 
   // Render Error
   _hideError() {
-    document.querySelector('.form__error-msg').innerHTML = '';
+    document
+      .querySelectorAll('.form__error-msg')
+      .forEach(msg => (msg.innerHTML = ''));
     document.querySelectorAll('.input').forEach(input => {
       input.classList.remove('error');
     });
   }
 
   renderError({ input, error }) {
+    console.log(input, error);
     this._hideError();
     const formInput = document.querySelector(`.input--${input}`);
+    const formGroup = formInput.parentElement;
     formInput.classList.add('error');
-    formInput.parentElement.querySelector('.form__error-msg').innerText = error;
+    formGroup.querySelector('.form__error-msg').innerText = error;
+    console.log(formGroup);
   }
 
   // Calculator
@@ -234,9 +239,11 @@ class View {
     });
   }
 
-  _clearBackpackForm() {
+  clearBackpackForm() {
     this._backpackInputItem.value = '';
     this._backpackInputItemCap.value = '';
+    this._backpackInputItem.focus();
+    this._hideError();
   }
 
   _getBackpackFormData() {
@@ -250,8 +257,6 @@ class View {
     this._backpackForm.addEventListener('submit', e => {
       e.preventDefault();
       handler(this._getBackpackFormData());
-      this._clearBackpackForm();
-      this._backpackInputItem.focus();
     });
   }
 

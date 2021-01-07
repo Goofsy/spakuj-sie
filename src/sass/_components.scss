@@ -19,6 +19,7 @@
   border-radius: 0.5rem;
 
   &__group {
+    position: relative;
     display: flex;
     flex-direction: column;
     margin-right: 1rem;
@@ -50,8 +51,9 @@
   }
 
   &__error-msg {
+    position: absolute;
     color: $error-color;
-    font-size: 0.95rem;
+    bottom: -16px;
   }
 }
 

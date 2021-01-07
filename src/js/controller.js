@@ -17,9 +17,14 @@ const controlDeleteItem = function (id) {
   renderAndUpdate();
 };
 
-const controlAddItem = function (data) {
-  model.addItem(data);
-  renderAndUpdate();
+const controlAddItem = function ({ itemName, itemCap }) {
+  try {
+    model.addItem(itemName, itemCap);
+    renderAndUpdate();
+    View.clearBackpackForm();
+  } catch (err) {
+    View.renderError(err);
+  }
 };
 
 const controlInitForm = function ({ title, cap }) {
