@@ -142,11 +142,11 @@ section {
     height: 110px;
   }
 
-  &__result {
-    color: $light-color;
-    margin-top: 0.9rem;
-    font-size: 1.1rem;
-  }
+  // &__result {
+  //   color: $light-color;
+  //   margin-top: 0.9rem;
+  //   font-size: 1.1rem;
+  // }
 
   &__icon {
     visibility: visible;
@@ -162,6 +162,6 @@ section {
     color: $dark-color;
 
     font-size: 0.95rem;
-    padding-top: 0.8rem;
+    padding-top: 0.5rem;
   }
 }

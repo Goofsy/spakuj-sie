@@ -4,7 +4,14 @@ import * as model from './model.js';
 import View from './View.js';
 
 const controlCalc = function (data) {
-  return model.calcCap(data);
+  try {
+    const calcResult = model.calcCap(data);
+    View.clearCalcform();
+    View.closeCalc();
+    View.renderCalcResult(calcResult);
+  } catch (err) {
+    View.renderError(err);
+  }
 };
 
 const controlEditItem = function (itemName, itemCap, itemId) {

@@ -4,7 +4,15 @@ export const state = {
 };
 
 export const calcCap = function ([a, b, c]) {
-  return ((a * b * c) / 1000).toFixed(2);
+  try {
+    if (a < 2) throw { input: 'calc-a', error: `Minimum 2cm` };
+    if (b < 2) throw { input: 'calc-b', error: `Minimum 2cm` };
+    if (c < 2) throw { input: 'calc-c', error: `Minimum 2cm` };
+
+    return ((a * b * c) / 1000).toFixed(2);
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const editItem = function (itemName, itemCap, itemId) {

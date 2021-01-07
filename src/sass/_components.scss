@@ -59,6 +59,10 @@
     padding: 0;
     margin: 0;
     flex-direction: column;
+
+    .form__group {
+      margin: 0;
+    }
   }
 }
 
@@ -142,7 +146,7 @@
 
     &--confirm {
       display: none;
-      margin-top: 1.1rem;
+      margin-top: 1.6rem;
       padding-bottom: 0.4rem;
       padding-top: 0.6rem;
       border-radius: 4px;
@@ -231,13 +235,13 @@ input[type='number'] {
     width: 100%;
     padding-top: 1rem;
     padding-left: 0;
-    height: 2.2rem;
+    height: 2.4rem;
     font-size: 1rem;
     color: $light-color;
 
-    &:first-child {
-      height: 2rem;
-      padding-top: 0.8rem;
+    &-a {
+      height: 2.05rem;
+      padding-top: 0.6rem;
     }
 
     &:hover,

@@ -21,12 +21,14 @@ class View {
   _calcInputA = document.querySelector('.input--calc-a');
   _calcInputB = document.querySelector('.input--calc-b');
   _calcInputC = document.querySelector('.input--calc-c');
-  _calcResult = document.querySelector('.calc__result');
+  // _calcResult = document.querySelector('.calc__result');
   _calcTooltip = document.querySelector('.tooltip');
 
   constructor() {
     this._handlerOpenEditForm();
     this._handlerCloseEditForm();
+    this._handlerShowEditButtons();
+    this._handlerHideEditButtons();
     this._handlerOpenCalc();
     this._handlerCloseCalc();
     this._handlerCloseCalcByBody();
@@ -45,13 +47,11 @@ class View {
   }
 
   renderError({ input, error }) {
-    // console.log(input, error);
     this._hideError();
     const formInput = document.querySelector(`.input--${input}`);
     const formGroup = formInput.parentElement;
     formInput.classList.add('error');
     formGroup.querySelector('.form__error-msg').innerText = error;
-    // console.log(formGroup);
   }
 
   // Calculator
@@ -61,8 +61,10 @@ class View {
     }, 4000);
   }
 
-  _clearCalcform() {
+  clearCalcform() {
+    // this._calcInputA.focus();
     this._calcInputs.forEach(input => (input.value = ''));
+    this._hideError();
   }
 
   _getCalcFormData() {
@@ -70,44 +72,46 @@ class View {
     return formData;
   }
 
+  renderCalcResult(cap) {
+    const inputTarget = this._calc.dataset.input;
+    document.querySelector(`.input--${inputTarget}`).value = cap;
+  }
+
   addHandlerCalc(handler) {
     this._calcForm.addEventListener('submit', e => {
       e.preventDefault();
-      const cap = handler(this._getCalcFormData());
-      const inputTarget = this._calc.dataset.input;
-      document.querySelector(`.input--${inputTarget}`).value = cap;
-      this._calcResult.innerHTML = `${cap}L`;
-      this._calcInputA.focus();
-      this._clearCalcform();
+      handler(this._getCalcFormData());
+
+      // this._calcResult.innerHTML = `${cap}L`;
     });
   }
 
-  _closeCalc() {
+  closeCalc() {
     this._calc.style.clipPath = 'circle(13% at 82% 86.6%)';
     this._calcOpenBtn.classList.remove('hidden');
     this._calcConfirmBtn.style.display = 'none';
-    this._calcResult.innerHTML = '';
-    this._clearCalcform();
+    // this._calcResult.innerHTML = '';
+    this.clearCalcform();
   }
 
   _handlerCloseCalcByEsc() {
     document.body.addEventListener('keydown', e => {
       if (e.key !== 'Escape') return;
-      this._closeCalc();
+      this.closeCalc();
     });
   }
 
   _handlerCloseCalcByBody() {
     document.body.addEventListener('click', e => {
       if (e.target.closest('.calc')) return;
-      this._closeCalc();
+      this.closeCalc();
     });
   }
 
   _handlerCloseCalc() {
     this._calcCloseBtn.addEventListener('click', e => {
       e.preventDefault();
-      this._closeCalc();
+      this.closeCalc();
     });
   }
 
@@ -122,7 +126,6 @@ class View {
   }
 
   // Backpack
-
   addHandlerEditItem(handler) {
     this._backpackList.addEventListener('click', e => {
       e.preventDefault();
@@ -132,6 +135,22 @@ class View {
       const itemCap = form.querySelector('.input--edit--item-cap').value;
       const itemId = form.dataset.id;
       handler(itemName, itemCap, itemId);
+    });
+  }
+
+  _handlerHideEditButtons() {
+    this._backpackList.addEventListener('mouseout', e => {
+      const item = e.target.closest('.item');
+      if (!item) return;
+      item.querySelector('.buttons').classList.add('hidden');
+    });
+  }
+
+  _handlerShowEditButtons() {
+    this._backpackList.addEventListener('mouseover', e => {
+      const item = e.target.closest('.item');
+      if (!item) return;
+      item.querySelector('.buttons').classList.remove('hidden');
     });
   }
 
@@ -171,7 +190,7 @@ class View {
           />
           <small class="form__error-msg"></small>
         </div>
-        <div class="buttons">
+        <div class="buttons ">
           <button class="btn--edit btn--edit--confirm"><i class="arrow arrow--right"></i></button>
          <button class="btn--edit btn--edit--cancel">x</button>
         </div>
@@ -215,7 +234,7 @@ class View {
       <li class="list__item" data-id="${id}">
         <div class="item">
           <p class="item-name">${itemName}</p>
-          <div class="buttons">
+          <div class="buttons hidden">
             <button class="btn--list btn--list--edit" title="Edytuj">
               <i class="far fa-edit fa-lg"></i>
             </button>

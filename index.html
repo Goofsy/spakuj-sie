@@ -18,7 +18,7 @@
       </div>
     </nav>
     <div class="container">
-      <section class="initial-form hidden">
+      <section class="initial-form">
         <form class="form" autocomplete="off" novalidate>
           <div class="form__group">
             <label for="where">Dokąd się wybierasz?</label>
@@ -43,7 +43,7 @@
           <button class="btn btn--init">Potwierdź</button>
         </form>
       </section>
-      <section class="content">
+      <section class="content hidden">
         <div class="backpack">
           <h3 class="backpack__title"></h3>
           <div class="backpack__img">
@@ -87,26 +87,35 @@
         <p class="calc__info">Wymiary podaj w cm</p>
 
         <form class="form form--calc" autocomplete="off" novalidate>
-          <input
-            type="number"
-            class="input input--calc input--calc-a"
-            placeholder="Długość (a)"
-          />
-          <input
-            type="number"
-            class="input input--calc input--calc-b"
-            placeholder="Szerokość (b)"
-          />
-          <input
-            type="number"
-            class="input input--calc input--calc-c"
-            placeholder="Wysokość (c)"
-          />
+          <div class="form__group">
+            <input
+              type="number"
+              class="input input--calc input--calc-a"
+              placeholder="Długość (a)"
+            />
+            <small class="form__error-msg"></small>
+          </div>
+          <div class="form__group">
+            <input
+              type="number"
+              class="input input--calc input--calc-b"
+              placeholder="Szerokość (b)"
+            />
+            <small class="form__error-msg"></small>
+          </div>
+          <div class="form__group">
+            <input
+              type="number"
+              class="input input--calc input--calc-c"
+              placeholder="Wysokość (c)"
+            />
+            <small class="form__error-msg"></small>
+          </div>
           <button class="btn--calc btn--calc--confirm">
             <i class="arrow arrow--right"></i>
           </button>
         </form>
-        <p class="calc__result"></p>
+        <!-- <p class="calc__result"></p> -->
         <button class="btn--calc btn--calc--close">x</button>
         <button class="btn--calc btn--calc--open">
           <i class="fas fa-calculator calc__icon"></i>
