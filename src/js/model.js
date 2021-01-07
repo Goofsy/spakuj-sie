@@ -1,7 +1,5 @@
 export const state = {
-  backpackData: {
-    cap: 50,
-  },
+  backpackData: {},
   backpackList: [],
 };
 
@@ -10,11 +8,19 @@ export const calcCap = function ([a, b, c]) {
 };
 
 export const editItem = function (itemName, itemCap, itemId) {
-  state.backpackList.forEach((item, i) => {
-    if (item.id !== itemId) return;
-    item.itemName = itemName;
-    item.itemCap = itemCap;
-  });
+  try {
+    const item = itemName.trim();
+    const cap = +itemCap;
+    errorItemInput(item, 'edit--item');
+    errorItemCapInput(cap, 'edit--item-cap');
+    state.backpackList.forEach((item, i) => {
+      if (item.id !== itemId) return;
+      item.itemName = itemName;
+      item.itemCap = itemCap;
+    });
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const deleteItem = function (id) {
@@ -27,7 +33,7 @@ export const deleteItem = function (id) {
 const createItemObject = function (itemName, itemCap) {
   return {
     itemName: itemName,
-    itemCap: itemCap.toFixed(1),
+    itemCap: +itemCap.toFixed(1),
     id: '_' + Math.random().toString(36).substr(2, 9),
   };
 };
@@ -49,7 +55,7 @@ export const updateBackpack = function () {
   const filledCap = state.backpackList
     .map(item => +Object.values(item)[1])
     .reduce((prev, cur) => prev + cur, 0);
-  state.backpackData.filledCap = filledCap.toFixed(1);
+  state.backpackData.filledCap = +filledCap.toFixed(1);
   state.backpackData.filledPercentage = (
     (filledCap / state.backpackData.cap) *
     100
@@ -65,7 +71,7 @@ export const createBackpack = function (t, c) {
 
     state.backpackData = {
       title: title.charAt(0).toUpperCase() + title.slice(1),
-      cap: Number.parseFloat(c).toFixed(1),
+      cap: +Number.parseFloat(c).toFixed(1),
       filledCap: 0,
       filledPercentage: 0,
     };
@@ -86,6 +92,6 @@ const errorItemInput = function (item, input) {
     throw { input: `${input}`, error: 'Pole nie może byc puste' };
   if (`${item}`.length > 20)
     throw { input: `${input}`, error: 'Maksymalna ilość znaków: 20' };
-  if (/[0-9]+$/.test(`${item}`))
-    throw { input: `${input}`, error: 'Nie może być liczbą' };
+  if (!/^[A-Za-z]+$/.test(`${item.charAt(0)}`))
+    throw { input: `${input}`, error: 'Musi zaczynać się literą' };
 };

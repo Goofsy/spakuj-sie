@@ -122,7 +122,6 @@ class View {
   }
 
   // Backpack
-  getEditItemFormData() {}
 
   addHandlerEditItem(handler) {
     this._backpackList.addEventListener('click', e => {
@@ -130,14 +129,13 @@ class View {
       if (!e.target.closest('.btn--edit--confirm')) return;
       const form = e.target.closest('.form--edit-item');
       const itemName = form.querySelector('.input--edit--item').value;
-      const itemCap = form.querySelector('.input--edit--cap').value;
+      const itemCap = form.querySelector('.input--edit--item-cap').value;
       const itemId = form.dataset.id;
       handler(itemName, itemCap, itemId);
-      this._closeEditForm();
     });
   }
 
-  _closeEditForm() {
+  closeEditForm() {
     document.querySelectorAll('.item').forEach(e => {
       e.style.display = 'flex';
     });
@@ -150,7 +148,7 @@ class View {
     this._backpackList.addEventListener('click', e => {
       e.preventDefault();
       if (!e.target.closest('.btn--edit--cancel')) return;
-      this._closeEditForm();
+      this.closeEditForm();
     });
   }
 
@@ -163,13 +161,15 @@ class View {
             class="input input--edit input--edit--item"
             value="${itemName}"
           />
+          <small class="form__error-msg"></small>
         </div>
         <div class="form__group">
           <input
             type="number"
-            class="input input--edit input--edit--cap"
+            class="input input--edit input--edit--item-cap"
             value="${itemCap}"
           />
+          <small class="form__error-msg"></small>
         </div>
         <div class="buttons">
           <button class="btn--edit btn--edit--confirm"><i class="arrow arrow--right"></i></button>
@@ -182,7 +182,7 @@ class View {
   _handlerOpenEditForm() {
     this._backpackList.addEventListener('click', e => {
       if (!e.target.closest('.btn--list--edit')) return;
-      this._closeEditForm();
+      this.closeEditForm();
       const listItem = e.target.closest('.list__item');
       const itemName = listItem.querySelector('.item-name').innerHTML;
       const itemId = listItem.dataset.id;

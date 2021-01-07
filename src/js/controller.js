@@ -8,8 +8,13 @@ const controlCalc = function (data) {
 };
 
 const controlEditItem = function (itemName, itemCap, itemId) {
-  model.editItem(itemName, itemCap, itemId);
-  renderAndUpdate();
+  try {
+    model.editItem(itemName, itemCap, itemId);
+    renderAndUpdate();
+    View.closeEditForm();
+  } catch (err) {
+    View.renderError(err);
+  }
 };
 
 const controlDeleteItem = function (id) {
