@@ -1,5 +1,7 @@
 export const state = {
-  backpackData: {},
+  backpackData: {
+    cap: 50,
+  },
   backpackList: [],
 };
 
@@ -19,8 +21,19 @@ export const editItem = function (itemName, itemCap, itemId) {
   try {
     const item = itemName.trim();
     const cap = +itemCap;
+    const [prevItemCap] = state.backpackList.map(item => {
+      if (item.id !== itemId) return;
+      return item.itemCap;
+    });
     errorItemInput(item, 'edit--item');
-    errorItemCapInput(cap, 'edit--item-cap');
+    if (cap < 0.1) throw { input: 'edit--item-cap', error: `Minimum 0.1l` };
+
+    if (
+      cap - prevItemCap + state.backpackData.filledCap >
+      state.backpackData.cap
+    )
+      throw { input: 'edit--item-cap', error: 'Brak miejsca' };
+
     state.backpackList.forEach((item, i) => {
       if (item.id !== itemId) return;
       item.itemName = itemName;
@@ -92,7 +105,7 @@ const errorItemCapInput = function (cap, input) {
   if (cap < 0.1) throw { input: `${input}`, error: `Minimum 0.1l` };
 
   if (cap + state.backpackData.filledCap > state.backpackData.cap)
-    throw { input: `${input}`, error: 'Nie zmieści się' };
+    throw { input: `${input}`, error: 'Brak miejsca' };
 };
 
 const errorItemInput = function (item, input) {

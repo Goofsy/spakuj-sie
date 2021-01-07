@@ -63,6 +63,10 @@
     .form__group {
       margin: 0;
     }
+
+    .form__error-msg {
+      left: 0px;
+    }
   }
 }
 
@@ -224,7 +228,7 @@ input[type='number'] {
     }
 
     &--item-cap {
-      width: 83px;
+      width: 84px;
     }
   }
 
