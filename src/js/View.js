@@ -1,19 +1,19 @@
 class View {
   _initForm = document.querySelector('.initial-form');
-  _initFormBtn = document.querySelector('.btn--init');
   _initFormInputWhere = document.querySelector('.input--where');
   _initFormInputSize = document.querySelector('.input--size');
 
   _backpackContent = document.querySelector('.content');
+  _backpackForm = document.querySelector('.form--add-item');
   _backpackTitle = document.querySelector('.backpack__title');
   _backpackCap = document.querySelector('.backpack__capacity');
   _backpackImgOverlay = document.querySelector('.backpack__img--overlay');
   _backpackInputItem = document.querySelector('.input--item');
   _backpackInputItemCap = document.querySelector('.input--item-cap');
-  _backpackFormBtn = document.querySelector('.btn--confirm');
   _backpackList = document.querySelector('.list');
 
   _calc = document.querySelector('.calc');
+  _calcForm = document.querySelector('.form--calc');
   _calcOpenBtn = document.querySelector('.btn--calc--open');
   _calcCloseBtn = document.querySelector('.btn--calc--close');
   _calcConfirmBtn = document.querySelector('.btn--calc--confirm');
@@ -34,6 +34,21 @@ class View {
     this._hideCalcTooltip();
   }
 
+  // Render Error
+  _hideError() {
+    document.querySelector('.form__error-msg').innerHTML = '';
+    document.querySelectorAll('.input').forEach(input => {
+      input.classList.remove('error');
+    });
+  }
+
+  renderError({ input, error }) {
+    this._hideError();
+    const formInput = document.querySelector(`.input--${input}`);
+    formInput.classList.add('error');
+    formInput.parentElement.querySelector('.form__error-msg').innerText = error;
+  }
+
   // Calculator
   _hideCalcTooltip() {
     setInterval(() => {
@@ -51,7 +66,7 @@ class View {
   }
 
   addHandlerCalc(handler) {
-    this._calcConfirmBtn.addEventListener('click', e => {
+    this._calcForm.addEventListener('submit', e => {
       e.preventDefault();
       const cap = handler(this._getCalcFormData());
       const inputTarget = this._calc.dataset.input;
@@ -102,6 +117,8 @@ class View {
   }
 
   // Backpack
+  getEditItemFormData() {}
+
   addHandlerEditItem(handler) {
     this._backpackList.addEventListener('click', e => {
       e.preventDefault();
@@ -230,7 +247,7 @@ class View {
   }
 
   addHandlerBackpackForm(handler) {
-    this._backpackFormBtn.addEventListener('click', e => {
+    this._backpackForm.addEventListener('submit', e => {
       e.preventDefault();
       handler(this._getBackpackFormData());
       this._clearBackpackForm();
@@ -261,9 +278,10 @@ class View {
   }
 
   // Init Form
-  _hideInitFormAndShowContent() {
+  hideInitFormAndShowContent() {
     this._initForm.classList.toggle('hidden');
     this._backpackContent.classList.toggle('hidden');
+    this._calc.dataset.input = 'item-cap';
   }
 
   _getInitFormData() {
@@ -274,11 +292,9 @@ class View {
   }
 
   addHandlerInitForm(handler) {
-    this._initFormBtn.addEventListener('click', e => {
+    this._initForm.addEventListener('submit', e => {
       e.preventDefault();
       handler(this._getInitFormData());
-      this._hideInitFormAndShowContent();
-      this._calc.dataset.input = 'item-cap';
     });
   }
 }

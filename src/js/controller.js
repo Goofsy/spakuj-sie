@@ -1,33 +1,38 @@
 import 'core-js';
-// import 'regenerator-runtime/runtime';
+import 'regenerator-runtime/runtime';
 import * as model from './model.js';
 import View from './View.js';
 
-const controlCalc = function ([a, b, c]) {
-  return model.calcCap(a, b, c);
+const controlCalc = function (data) {
+  return model.calcCap(data);
 };
 
 const controlEditItem = function (itemName, itemCap, itemId) {
   model.editItem(itemName, itemCap, itemId);
-  renderandUpdate();
+  renderAndUpdate();
 };
 
 const controlDeleteItem = function (id) {
   model.deleteItem(id);
-  renderandUpdate();
+  renderAndUpdate();
 };
 
 const controlAddItem = function (data) {
   model.addItem(data);
-  renderandUpdate();
+  renderAndUpdate();
 };
 
 const controlInitForm = function ({ title, cap }) {
-  model.createBackpack(title, cap);
-  View.renderBackpack(model.state.backpackData);
+  try {
+    model.createBackpack(title, cap);
+    View.hideInitFormAndShowContent();
+    View.renderBackpack(model.state.backpackData);
+  } catch (err) {
+    View.renderError(err);
+  }
 };
 
-const renderandUpdate = function () {
+const renderAndUpdate = function () {
   model.updateBackpack();
   View.renderBackpackList(model.state.backpackList);
   View.renderBackpack(model.state.backpackData);

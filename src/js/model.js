@@ -3,7 +3,7 @@ export const state = {
   backpackList: [],
 };
 
-export const calcCap = function (a, b, c) {
+export const calcCap = function ([a, b, c]) {
   return ((a * b * c) / 1000).toFixed(2);
 };
 
@@ -45,11 +45,21 @@ export const updateBackpack = function () {
   ).toFixed(1);
 };
 
-export const createBackpack = function (title, cap, filledCap = 0) {
-  state.backpackData = {
-    title: title.charAt(0).toUpperCase() + title.slice(1),
-    cap: +cap,
-    filledCap: filledCap,
-    filledPercentage: 0,
-  };
+export const createBackpack = function (t, c) {
+  try {
+    const title = t.trim();
+
+    if (title.length < 1)
+      throw { input: 'where', error: 'Pole nie może byc puste' };
+    if (c.length < 1) throw { input: 'size', error: 'Pole nie może byc puste' };
+    if (c < 1) throw { input: 'size', error: 'Minimum 1l' };
+    state.backpackData = {
+      title: title.charAt(0).toUpperCase() + title.slice(1),
+      cap: Number.parseFloat(c).toFixed(1),
+      filledCap: 0,
+      filledPercentage: 0,
+    };
+  } catch (err) {
+    throw err;
+  }
 };
