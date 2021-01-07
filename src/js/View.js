@@ -1,8 +1,8 @@
 class View {
-  _initialForm = document.querySelector('.initial-form');
-  _btnInitForm = document.querySelector('.btn--init');
-  _inputWhereInitForm = document.querySelector('.input--where');
-  _inputSizeInitForm = document.querySelector('.input--size');
+  _initForm = document.querySelector('.initial-form');
+  _initFormBtn = document.querySelector('.btn--init');
+  _initFormInputWhere = document.querySelector('.input--where');
+  _initFormInputSize = document.querySelector('.input--size');
 
   _backpackContent = document.querySelector('.content');
   _backpackTitle = document.querySelector('.backpack__title');
@@ -17,10 +17,12 @@ class View {
   _calcOpenBtn = document.querySelector('.btn--calc--open');
   _calcCloseBtn = document.querySelector('.btn--calc--close');
   _calcConfirmBtn = document.querySelector('.btn--calc--confirm');
+  _calcInputs = document.querySelectorAll('.input--calc');
   _calcInputA = document.querySelector('.input--calc-a');
   _calcInputB = document.querySelector('.input--calc-b');
   _calcInputC = document.querySelector('.input--calc-c');
   _calcResult = document.querySelector('.calc__result');
+  _calcTooltip = document.querySelector('.tooltip');
 
   constructor() {
     this._handlerOpenEditForm();
@@ -28,27 +30,32 @@ class View {
     this._handlerOpenCalc();
     this._handlerCloseCalc();
     this._handlerCloseCalcByBody();
+    this._handlerCloseCalcByEsc();
+    this._hideCalcTooltip();
   }
 
   // Calculator
+  _hideCalcTooltip() {
+    setInterval(() => {
+      this._calcTooltip.style.display = 'none';
+    }, 4000);
+  }
+
   _clearCalcform() {
-    this._calcInputA.value = '';
-    this._calcInputB.value = '';
-    this._calcInputC.value = '';
+    this._calcInputs.forEach(input => (input.value = ''));
   }
 
   _getCalcFormData() {
-    return {
-      a: this._calcInputA.value,
-      b: this._calcInputB.value,
-      c: this._calcInputC.value,
-    };
+    const formData = [...this._calcInputs].map(input => input.value);
+    return formData;
   }
 
   addHandlerCalc(handler) {
     this._calcConfirmBtn.addEventListener('click', e => {
       e.preventDefault();
       const cap = handler(this._getCalcFormData());
+      const inputTarget = this._calc.dataset.input;
+      document.querySelector(`.input--${inputTarget}`).value = cap;
       this._calcResult.innerHTML = `${cap}L`;
       this._calcInputA.focus();
       this._clearCalcform();
@@ -56,9 +63,18 @@ class View {
   }
 
   _closeCalc() {
-    this._calc.style.clipPath = 'circle(13% at 83.4% 87%)';
+    this._calc.style.clipPath = 'circle(13% at 82% 86.6%)';
     this._calcOpenBtn.classList.remove('hidden');
     this._calcConfirmBtn.style.display = 'none';
+    this._calcResult.innerHTML = '';
+    this._clearCalcform();
+  }
+
+  _handlerCloseCalcByEsc() {
+    document.body.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      this._closeCalc();
+    });
   }
 
   _handlerCloseCalcByBody() {
@@ -81,6 +97,7 @@ class View {
       this._calc.style.clipPath = 'circle(100%)';
       this._calcOpenBtn.classList.add('hidden');
       this._calcConfirmBtn.style.display = 'block';
+      this._calcTooltip.style.display = 'none';
     });
   }
 
@@ -245,22 +262,23 @@ class View {
 
   // Init Form
   _hideInitFormAndShowContent() {
-    this._initialForm.classList.toggle('hidden');
+    this._initForm.classList.toggle('hidden');
     this._backpackContent.classList.toggle('hidden');
   }
 
   _getInitFormData() {
     return {
-      title: this._inputWhereInitForm.value,
-      cap: this._inputSizeInitForm.value,
+      title: this._initFormInputWhere.value,
+      cap: this._initFormInputSize.value,
     };
   }
 
   addHandlerInitForm(handler) {
-    this._btnInitForm.addEventListener('click', e => {
+    this._initFormBtn.addEventListener('click', e => {
       e.preventDefault();
       handler(this._getInitFormData());
       this._hideInitFormAndShowContent();
+      this._calc.dataset.input = 'item-cap';
     });
   }
 }

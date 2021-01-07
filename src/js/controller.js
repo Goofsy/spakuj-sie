@@ -3,7 +3,7 @@ import 'core-js';
 import * as model from './model.js';
 import View from './View.js';
 
-const controlCalc = function ({ a, b, c }) {
+const controlCalc = function ([a, b, c]) {
   return model.calcCap(a, b, c);
 };
 

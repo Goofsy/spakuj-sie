@@ -47,7 +47,6 @@
     padding: 0;
     margin: 0;
     flex-direction: column;
-    margin-top: 0.5rem;
   }
 }
 
@@ -132,8 +131,8 @@
     &--confirm {
       display: none;
       margin-top: 1.1rem;
-      padding-bottom: 0.5rem;
-      padding-top: 0.7rem;
+      padding-bottom: 0.4rem;
+      padding-top: 0.6rem;
       border-radius: 4px;
       border: 1px solid $light-color;
       background-color: transparent;
@@ -222,14 +221,16 @@ input[type='number'] {
     width: 100%;
     padding-top: 1rem;
     padding-left: 0;
-    height: 2.5rem;
+    height: 2.2rem;
     font-size: 1rem;
     color: $light-color;
 
-    &:hover {
-      border-color: $light-color;
+    &:first-child {
+      height: 2rem;
+      padding-top: 0.8rem;
     }
 
+    &:hover,
     &:focus {
       border-color: $light-color;
     }
@@ -263,45 +264,26 @@ input[type='number'] {
   left: 0;
 }
 
-// Calculator
-.calc {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  width: 300px;
-  height: 400px;
-  bottom: 3rem;
-  right: 3rem;
+// Tooltip
+.tooltip {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: $light-color;
+  text-align: center;
+  width: 10rem;
+  height: 3rem;
+  padding-top: 1rem;
   border-radius: 0.5rem;
-  background-color: $primary-color;
-  clip-path: circle(13% at 83.4% 87%);
-  transition: clip-path 0.5s ease-in-out;
+  position: absolute;
+  bottom: 6.8rem;
+  right: 1.8rem;
 
-  &__title {
-    text-align: center;
-    padding: 1rem;
-    color: $light-color;
-    font-size: 1.3rem;
-  }
-
-  &__img {
-    height: 110px;
-  }
-
-  &__result {
-    color: $light-color;
-    margin-top: 1rem;
-    font-size: 1.1rem;
-  }
-
-  &__icon {
-    visibility: visible;
-    padding: 1.5rem;
+  &:after {
+    content: '';
     position: absolute;
-    color: $light-color;
-    bottom: 0.5rem;
-    right: 0.5rem;
-    font-size: 2.5rem;
+    left: 77%;
+    top: 100%;
+    border: 10px solid #000;
+    border-color: #000 transparent transparent;
+    opacity: 0.6;
   }
 }
