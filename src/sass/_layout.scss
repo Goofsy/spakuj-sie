@@ -1,7 +1,6 @@
 .container {
   max-width: $site-width;
   margin: auto;
-  height: 100%;
   padding: 0;
 }
 
@@ -44,8 +43,8 @@
   }
 
   .calc {
-    bottom: 0;
-    right: 0;
+    bottom: 0.5rem;
+    right: 0rem;
   }
 }
 
@@ -53,6 +52,20 @@
   .navbar__title {
     text-align: center;
     padding: 1.7rem 0;
+  }
+
+  .calc {
+    &__icon {
+      bottom: -0.5rem;
+    }
+
+    &__title {
+      padding-bottom: 0;
+    }
+
+    &__img {
+      display: none;
+    }
   }
 
   .initial-form {

@@ -80,7 +80,7 @@ class View {
   closeCalc() {
     this._calc.style.clipPath = 'circle(13% at 82% 86.6%)';
     this._calcOpenBtn.classList.remove('hidden--btn');
-    this._calcConfirmBtn.style.display = 'none';
+    this._calcConfirmBtn.style.visibility = 'hidden';
   }
 
   _handlerCloseCalcByEsc() {
@@ -109,7 +109,7 @@ class View {
       e.preventDefault();
       this._calc.style.clipPath = 'circle(100%)';
       this._calcOpenBtn.classList.add('hidden--btn');
-      this._calcConfirmBtn.style.display = 'block';
+      this._calcConfirmBtn.style.visibility = 'visible';
       // this._calcTooltip.style.display = 'none';
       this._hideError();
       this._calcInputA.focus();
