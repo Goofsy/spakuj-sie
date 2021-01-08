@@ -19,6 +19,7 @@ class View {
   _calcConfirmBtn = document.querySelector('.btn--calc--confirm');
   _calcInputs = document.querySelectorAll('.input--calc');
   _calcInputA = document.querySelector('.input--calc-a');
+  _calcIcon = document.querySelector('.calc__icon');
   // _calcTooltip = document.querySelector('.tooltip');
 
   constructor() {
@@ -78,8 +79,8 @@ class View {
   }
 
   closeCalc() {
-    this._calc.style.clipPath = 'circle(13% at 82% 86.6%)';
-    this._calcOpenBtn.classList.remove('hidden--btn');
+    this._calc.style.clipPath = 'circle(13% at 82% 86.36%)';
+    this._calcIcon.classList.remove('hidden--btn');
     this._calcConfirmBtn.style.visibility = 'hidden';
   }
 
@@ -108,7 +109,8 @@ class View {
     this._calcOpenBtn.addEventListener('click', e => {
       e.preventDefault();
       this._calc.style.clipPath = 'circle(100%)';
-      this._calcOpenBtn.classList.add('hidden--btn');
+      this._calcIcon.classList.add('hidden--btn');
+
       this._calcConfirmBtn.style.visibility = 'visible';
       // this._calcTooltip.style.display = 'none';
       this._hideError();
@@ -288,6 +290,7 @@ class View {
     this._initForm.classList.toggle('hidden');
     this._backpackContent.classList.toggle('hidden');
     this._calc.dataset.input = 'item-cap';
+    body.style.overflow = 'auto';
   }
 
   _getInitFormData() {

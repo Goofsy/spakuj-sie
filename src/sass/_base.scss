@@ -23,6 +23,7 @@ body {
   background-color: $medium-color;
   color: $dark-color;
   position: relative;
+  overflow: hidden;
 }
 
 section {
@@ -145,7 +146,7 @@ section {
   max-height: 400px;
   background-color: $primary-color;
   border-radius: 0.5rem;
-  clip-path: circle(13% at 82% 86.3%);
+  clip-path: circle(13% at 82% 86.2%);
   transition: clip-path 0.5s ease-in-out;
 
   &__title {
