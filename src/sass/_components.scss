@@ -1,5 +1,8 @@
 // Navbar
 .navbar {
+  position: relative;
+  display: flex;
+  flex-direction: row;
   background-color: $primary-color;
   &__title {
     color: $light-color;
