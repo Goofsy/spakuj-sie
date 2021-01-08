@@ -18,7 +18,7 @@
       </div>
     </nav>
     <div class="container">
-      <section class="initial-form hidden">
+      <section class="initial-form">
         <form class="form" autocomplete="off" novalidate>
           <div class="form__group">
             <label for="where">Dokąd się wybierasz?</label>
@@ -43,9 +43,9 @@
           <button class="btn btn--init">Potwierdź</button>
         </form>
       </section>
-      <section class="content">
+      <section class="content hidden">
         <div class="backpack">
-          <h3 class="backpack__title"></h3>
+          <h2 class="backpack__title"></h2>
           <div class="backpack__img">
             <img src="./imgs/backpack.svg" alt="backpack" />
             <div class="backpack__img--overlay"></div>
@@ -76,7 +76,9 @@
             </div>
             <button class="btn btn--confirm">Potwierdź</button>
           </form>
-          <ul class="list"></ul>
+          <ul class="list">
+            <p class="list__info">Plecak jest pusty</p>
+          </ul>
         </div>
       </section>
     </div>

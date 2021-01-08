@@ -4,3 +4,130 @@
   height: 100%;
   padding: 0;
 }
+
+@media (max-width: 1024px) {
+  .initial-form {
+    width: 100%;
+    margin: 18rem 0;
+  }
+
+  .content {
+    flex-direction: column-reverse;
+    margin: 0;
+    border-radius: 0px;
+
+    .backpack-list {
+      margin-bottom: 0px;
+    }
+
+    .form {
+      &--edit-item {
+        .form__group:nth-child(1) {
+          width: 75%;
+        }
+        .form__group:nth-child(2) {
+          width: 15%;
+        }
+      }
+    }
+
+    .input--edit {
+      &--item {
+        width: 100%;
+      }
+
+      &--item-cap {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+
+  .calc-container {
+    bottom: 0.1rem;
+    right: 0.11rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .navbar__title {
+    text-align: center;
+    padding: 1.7rem 0;
+  }
+
+  .initial-form {
+    margin: 14rem 0;
+    .form {
+      padding: 0.6rem 1.5rem 1.5rem 1.5rem;
+
+      &__group {
+        margin: 0.5rem 0;
+      }
+
+      .btn--init {
+        margin-top: 1.6rem;
+      }
+
+      .input {
+        height: 3rem;
+        width: 100%;
+      }
+    }
+  }
+
+  .content {
+    .input {
+      height: 3rem;
+      width: 100%;
+
+      &--edit {
+        &--item {
+          width: 100%;
+        }
+
+        &--item-cap {
+          width: 100%;
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+    }
+
+    .form {
+      &--edit-item {
+        flex-direction: row;
+        .form__group:nth-child(1) {
+          width: 65%;
+        }
+        .form__group:nth-child(2) {
+          width: 13%;
+        }
+      }
+
+      &--add-item {
+        margin-bottom: 2rem;
+        .form__group {
+          margin: 0.5rem 0;
+        }
+
+        .btn--confirm {
+          margin-top: 1.6rem;
+          height: 3rem;
+        }
+      }
+
+      .backpack-list {
+        margin-top: 0.6rem;
+      }
+    }
+  }
+
+  section {
+    .form {
+      flex-direction: column;
+      width: 100%;
+      box-shadow: none;
+      padding: 0;
+    }
+  }
+}

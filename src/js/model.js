@@ -1,7 +1,5 @@
 export const state = {
-  backpackData: {
-    cap: 50,
-  },
+  backpackData: {},
   backpackList: [],
 };
 
@@ -26,7 +24,7 @@ export const editItem = function (itemName, itemCap, itemId) {
       return item.itemCap;
     });
     errorItemInput(item, 'edit--item');
-    if (cap < 0.1) throw { input: 'edit--item-cap', error: `Minimum 0.1l` };
+    if (cap < 0.1) throw { input: 'edit--item-cap', error: `Min. 0.1l` };
 
     if (
       cap - prevItemCap + state.backpackData.filledCap >

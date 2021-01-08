@@ -4,17 +4,16 @@
   &__title {
     color: $light-color;
     font-size: 2.5rem;
-    padding: 1.7rem 0;
+    padding: 1.7rem 2rem;
   }
 }
 
 // Form
 .form {
+  position: relative;
   display: flex;
   justify-content: center;
   background-color: $light-color;
-  width: 80%;
-  margin: auto;
   padding: 3rem;
   border-radius: 0.5rem;
 
@@ -29,13 +28,12 @@
     position: absolute;
     color: $error-color;
     bottom: -16px;
-    left: 3.5px;
   }
 
   &--add-item {
-    margin: 1.5rem 1.5rem 1.5rem auto;
     box-shadow: 2px 1px 10px 3px rgba(0, 0, 0, 0.1);
     padding: 1rem 0 1.5rem 0;
+    margin-bottom: 1.5rem;
   }
 
   &--edit-item {
@@ -43,11 +41,24 @@
     padding: 0;
     box-shadow: 0;
     margin: 0;
-    width: 90%;
+    justify-content: stretch;
     .form__error-msg {
       top: 0;
       bottom: 28px;
     }
+
+    .form__group:nth-of-type(1) {
+      left: 4px;
+
+      .form__error-msg {
+        left: 7px;
+      }
+    }
+
+    // .form__group:nth-of-type(2) {
+    //   padding-right: 0;
+    //   margin-right: 0;
+    // }
 
     .form__group {
       height: 41.48px;
@@ -59,6 +70,7 @@
     padding: 0;
     margin: 0;
     flex-direction: column;
+    width: 80%;
 
     .form__group {
       margin: 0;
@@ -207,7 +219,7 @@ input[type='number'] {
   }
 
   &--item {
-    width: 245px;
+    width: 300px;
     height: 2.5rem;
   }
 
@@ -221,14 +233,15 @@ input[type='number'] {
     border: none;
     border-bottom: 1px solid $dark-color;
     border-radius: 0;
+
     padding-top: 0.9rem;
 
     &--item {
-      width: 358px;
+      width: 430px;
     }
 
     &--item-cap {
-      width: 84px;
+      width: 80px;
     }
   }
 
@@ -277,9 +290,9 @@ input[type='number'] {
 .hidden {
   position: absolute;
   visibility: hidden;
+  width: 0;
+  height: 0;
   opacity: 0.1;
-  top: 0;
-  left: 0;
 }
 // Error
 .error {

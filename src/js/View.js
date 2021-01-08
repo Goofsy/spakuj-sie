@@ -19,14 +19,11 @@ class View {
   _calcConfirmBtn = document.querySelector('.btn--calc--confirm');
   _calcInputs = document.querySelectorAll('.input--calc');
   _calcInputA = document.querySelector('.input--calc-a');
-  // _calcResult = document.querySelector('.calc__result');
   _calcTooltip = document.querySelector('.tooltip');
 
   constructor() {
     this._handlerOpenEditForm();
     this._handlerCloseEditForm();
-    this._handlerShowEditButtons();
-    this._handlerHideEditButtons();
     this._handlerOpenCalc();
     this._handlerCloseCalc();
     this._handlerCloseCalcByBody();
@@ -77,8 +74,6 @@ class View {
     this._calcForm.addEventListener('submit', e => {
       e.preventDefault();
       handler(this._getCalcFormData());
-
-      // this._calcResult.innerHTML = `${cap}L`;
     });
   }
 
@@ -86,7 +81,6 @@ class View {
     this._calc.style.clipPath = 'circle(13% at 82% 86.6%)';
     this._calcOpenBtn.classList.remove('hidden');
     this._calcConfirmBtn.style.display = 'none';
-    // this._calcResult.innerHTML = '';
   }
 
   _handlerCloseCalcByEsc() {
@@ -132,22 +126,6 @@ class View {
       const itemCap = form.querySelector('.input--edit--item-cap').value;
       const itemId = form.dataset.id;
       handler(itemName, itemCap, itemId);
-    });
-  }
-
-  _handlerHideEditButtons() {
-    this._backpackList.addEventListener('mouseout', e => {
-      const item = e.target.closest('.item');
-      if (!item) return;
-      item.querySelector('.buttons').classList.add('hidden');
-    });
-  }
-
-  _handlerShowEditButtons() {
-    this._backpackList.addEventListener('mouseover', e => {
-      const item = e.target.closest('.item');
-      if (!item) return;
-      item.querySelector('.buttons').classList.remove('hidden');
     });
   }
 
@@ -231,11 +209,11 @@ class View {
       <li class="list__item" data-id="${id}">
         <div class="item">
           <p class="item-name">${itemName}</p>
-          <div class="buttons hidden">
-            <button class="btn--list btn--list--edit" title="Edytuj">
+          <div class="buttons">
+            <button class="btn--list btn--list--edit">
               <i class="far fa-edit fa-lg"></i>
             </button>
-            <button class="btn--list btn--list--delete" title="Usuń">
+            <button class="btn--list btn--list--delete">
               <i class="far fa-trash-alt fa-lg"></i>
             </button>
           </div>
@@ -245,8 +223,15 @@ class View {
     `;
   }
 
+  _listInfo() {
+    return '<p class="list__info">Plecak jest pusty</p>';
+  }
+
   renderBackpackList(list) {
     this._clearBackpackList();
+    if (list.length === 0)
+      this._backpackList.insertAdjacentHTML('beforeend', this._listInfo());
+
     list.forEach(item => {
       this._backpackList.insertAdjacentHTML(
         'beforeend',
