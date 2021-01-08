@@ -19,9 +19,10 @@ export const editItem = function (itemName, itemCap, itemId) {
   try {
     const item = itemName.trim();
     const cap = +itemCap;
-    const [prevItemCap] = state.backpackList.map(item => {
+    let prevItemCap;
+    state.backpackList.forEach(item => {
       if (item.id !== itemId) return;
-      return item.itemCap;
+      prevItemCap = item.itemCap;
     });
     errorItemInput(item, 'edit--item');
     if (cap < 0.1) throw { input: 'edit--item-cap', error: `Min. 0.1l` };
