@@ -8,7 +8,7 @@
 @media (max-width: 1024px) {
   .initial-form {
     width: 100%;
-    margin: 18rem 0;
+    margin: 17rem 0 0 0;
   }
 
   .content {
@@ -44,8 +44,8 @@
   }
 
   .calc-container {
-    bottom: 0.1rem;
-    right: 0.11rem;
+    bottom: 0.15rem;
+    right: 0.15rem;
   }
 }
 
@@ -56,7 +56,8 @@
   }
 
   .initial-form {
-    margin: 14rem 0;
+    margin: 13.5rem 0 0 0;
+
     .form {
       padding: 0.6rem 1.5rem 1.5rem 1.5rem;
 

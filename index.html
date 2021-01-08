@@ -82,50 +82,47 @@
         </div>
       </section>
     </div>
-    <div class="calc-container">
-      <div class="calc" data-input="size">
-        <h3 class="calc__title">Oblicz objętość</h3>
-        <img src="./imgs/rectangle.svg" class="calc__img" alt="rectangle" />
-        <p class="calc__info">Wymiary podaj w cm</p>
+    <div class="calc" data-input="size">
+      <h3 class="calc__title">Oblicz objętość</h3>
+      <img src="./imgs/rectangle.svg" class="calc__img" alt="rectangle" />
+      <p class="calc__info">Wymiary podaj w cm</p>
 
-        <form class="form form--calc" autocomplete="off" novalidate>
-          <div class="form__group">
-            <input
-              type="number"
-              class="input input--calc input--calc-a"
-              placeholder="Długość (a)"
-            />
-            <small class="form__error-msg"></small>
-          </div>
-          <div class="form__group">
-            <input
-              type="number"
-              class="input input--calc input--calc-b"
-              placeholder="Szerokość (b)"
-            />
-            <small class="form__error-msg"></small>
-          </div>
-          <div class="form__group">
-            <input
-              type="number"
-              class="input input--calc input--calc-c"
-              placeholder="Wysokość (c)"
-            />
-            <small class="form__error-msg"></small>
-          </div>
-          <button class="btn--calc btn--calc--confirm">
-            <i class="arrow arrow--right"></i>
-          </button>
-        </form>
-        <!-- <p class="calc__result"></p> -->
-        <button class="btn--calc btn--calc--close">x</button>
-        <button class="btn--calc btn--calc--open">
-          <i class="fas fa-calculator calc__icon"></i>
+      <form class="form form--calc" autocomplete="off" novalidate>
+        <div class="form__group">
+          <input
+            type="number"
+            class="input input--calc input--calc-a"
+            placeholder="Długość (a)"
+          />
+          <small class="form__error-msg"></small>
+        </div>
+        <div class="form__group">
+          <input
+            type="number"
+            class="input input--calc input--calc-b"
+            placeholder="Szerokość (b)"
+          />
+          <small class="form__error-msg"></small>
+        </div>
+        <div class="form__group">
+          <input
+            type="number"
+            class="input input--calc input--calc-c"
+            placeholder="Wysokość (c)"
+          />
+          <small class="form__error-msg"></small>
+        </div>
+        <button class="btn--calc btn--calc--confirm">
+          <i class="arrow arrow--right"></i>
         </button>
-      </div>
-      <div class="tooltip">
-        <p>Oblicz objętość</p>
-      </div>
+      </form>
+      <button class="btn--calc btn--calc--close">x</button>
+      <button class="btn--calc btn--calc--open">
+        <i class="fas fa-calculator calc__icon"></i>
+      </button>
     </div>
+    <!-- <div class="tooltip">
+      <p>Oblicz objętość</p>
+    </div> -->
   </body>
 </html>

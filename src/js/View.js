@@ -19,7 +19,7 @@ class View {
   _calcConfirmBtn = document.querySelector('.btn--calc--confirm');
   _calcInputs = document.querySelectorAll('.input--calc');
   _calcInputA = document.querySelector('.input--calc-a');
-  _calcTooltip = document.querySelector('.tooltip');
+  // _calcTooltip = document.querySelector('.tooltip');
 
   constructor() {
     this._handlerOpenEditForm();
@@ -28,7 +28,7 @@ class View {
     this._handlerCloseCalc();
     this._handlerCloseCalcByBody();
     this._handlerCloseCalcByEsc();
-    this._hideCalcTooltip();
+    // this._hideCalcTooltip();
   }
 
   // Render Error
@@ -50,11 +50,11 @@ class View {
   }
 
   // Calculator
-  _hideCalcTooltip() {
-    setInterval(() => {
-      this._calcTooltip.style.display = 'none';
-    }, 4000);
-  }
+  // _hideCalcTooltip() {
+  //   setInterval(() => {
+  //     this._calcTooltip.style.display = 'none';
+  //   }, 4000);
+  // }
 
   clearCalcform() {
     this._calcInputs.forEach(input => (input.value = ''));
@@ -110,7 +110,7 @@ class View {
       this._calc.style.clipPath = 'circle(100%)';
       this._calcOpenBtn.classList.add('hidden');
       this._calcConfirmBtn.style.display = 'block';
-      this._calcTooltip.style.display = 'none';
+      // this._calcTooltip.style.display = 'none';
       this._hideError();
       this._calcInputA.focus();
     });
