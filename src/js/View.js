@@ -79,7 +79,7 @@ class View {
 
   closeCalc() {
     this._calc.style.clipPath = 'circle(13% at 82% 86.6%)';
-    this._calcOpenBtn.classList.remove('hidden');
+    this._calcOpenBtn.classList.remove('hidden--btn');
     this._calcConfirmBtn.style.display = 'none';
   }
 
@@ -108,7 +108,7 @@ class View {
     this._calcOpenBtn.addEventListener('click', e => {
       e.preventDefault();
       this._calc.style.clipPath = 'circle(100%)';
-      this._calcOpenBtn.classList.add('hidden');
+      this._calcOpenBtn.classList.add('hidden--btn');
       this._calcConfirmBtn.style.display = 'block';
       // this._calcTooltip.style.display = 'none';
       this._hideError();
