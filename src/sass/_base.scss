@@ -23,7 +23,6 @@ body {
   background-color: $medium-color;
   color: $dark-color;
   position: relative;
-  overflow: hidden;
 }
 
 section {
@@ -123,16 +122,6 @@ section {
     }
   }
 }
-
-// Calculator
-// .calc-container {
-//   position: fixed;
-//   width: 300px;
-//   height: 400px;
-//   bottom: 3rem;
-//   right: 3rem;
-//   z-index: 15;
-// }
 
 .calc {
   position: absolute;
