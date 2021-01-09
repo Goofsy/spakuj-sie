@@ -13,8 +13,11 @@ $error-color: rgb(216, 51, 51);
   box-sizing: border-box;
 }
 
-html {
-  min-height: 100vh;
+// Base
+.container {
+  max-width: $site-width;
+  margin: auto;
+  padding: 0;
 }
 
 body {
@@ -161,5 +164,30 @@ section {
   &__info {
     font-size: 0.95rem;
     padding-top: 0.5rem;
+  }
+}
+
+// Hidden
+.hidden {
+  position: absolute;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  top: 0;
+  left: 0;
+}
+.hidden--btn {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0.1;
+}
+// Error
+.error {
+  border-color: $error-color;
+
+  &:hover,
+  &:focus {
+    border-color: $error-color;
   }
 }
