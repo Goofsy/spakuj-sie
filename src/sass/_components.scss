@@ -43,8 +43,8 @@
     margin: 0;
     justify-content: stretch;
     .form__error-msg {
-      top: 0;
       bottom: 28px;
+      white-space: nowrap;
     }
 
     .form__group:nth-of-type(1) {
