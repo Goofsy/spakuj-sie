@@ -17,14 +17,14 @@ export const calcCap = function ([a, b, c]) {
 
 export const editItem = function (itemName, itemCap, itemId) {
   try {
-    const item = itemName.trim();
+    const itemN = itemName.trim();
     const cap = +itemCap;
     let prevItemCap;
     state.backpackList.forEach(item => {
       if (item.id !== itemId) return;
       prevItemCap = item.itemCap;
     });
-    errorItemInput(item, 'edit--item');
+    errorItemInput(itemN, 'edit--item');
     if (cap < 0.1) throw { input: 'edit--item-cap', error: `Min. 0.1l` };
 
     if (
@@ -35,7 +35,7 @@ export const editItem = function (itemName, itemCap, itemId) {
 
     state.backpackList.forEach((item, i) => {
       if (item.id !== itemId) return;
-      item.itemName = itemName;
+      item.itemName = itemN;
       item.itemCap = cap.toFixed(1);
     });
   } catch (err) {
