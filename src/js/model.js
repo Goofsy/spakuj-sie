@@ -36,7 +36,7 @@ export const editItem = function (itemName, itemCap, itemId) {
     state.backpackList.forEach((item, i) => {
       if (item.id !== itemId) return;
       item.itemName = itemN;
-      item.itemCap = cap.toFixed(1);
+      item.itemCap = +cap.toFixed(1);
     });
   } catch (err) {
     throw err;
