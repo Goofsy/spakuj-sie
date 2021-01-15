@@ -22,15 +22,15 @@ class View {
   _calcIcon = document.querySelector('.calc__icon');
 
   constructor() {
-    this._handlerOpenEditForm();
-    this._handlerCloseEditForm();
-    this._handlerOpenCalc();
-    this._handlerCloseCalc();
-    this._handlerCloseCalcByBody();
-    this._handlerCloseCalcByEsc();
+    this._handleOpenEditForm();
+    this._handleCloseEditForm();
+    this._handleOpenCalc();
+    this._handleCloseCalc();
+    this._handleCloseCalcByBody();
+    this._handleCloseCalcByEsc();
   }
 
-  // Render Error
+  // Errors
   _hideError() {
     document
       .querySelectorAll('.form__error-msg')
@@ -48,6 +48,7 @@ class View {
     formGroup.querySelector('.form__error-msg').innerText = error;
   }
 
+  // Calc
   clearCalcform() {
     this._calcInputs.forEach(input => (input.value = ''));
   }
@@ -75,28 +76,28 @@ class View {
     this._calcConfirmBtn.style.visibility = 'hidden';
   }
 
-  _handlerCloseCalcByEsc() {
+  _handleCloseCalcByEsc() {
     document.body.addEventListener('keydown', e => {
       if (e.key !== 'Escape') return;
       this.closeCalc();
     });
   }
 
-  _handlerCloseCalcByBody() {
+  _handleCloseCalcByBody() {
     document.body.addEventListener('click', e => {
       if (e.target.closest('.calc')) return;
       this.closeCalc();
     });
   }
 
-  _handlerCloseCalc() {
+  _handleCloseCalc() {
     this._calcCloseBtn.addEventListener('click', e => {
       e.preventDefault();
       this.closeCalc();
     });
   }
 
-  _handlerOpenCalc() {
+  _handleOpenCalc() {
     this._calcOpenBtn.addEventListener('click', e => {
       e.preventDefault();
       this._calc.style.clipPath = 'circle(100%)';
@@ -129,7 +130,7 @@ class View {
     }
   }
 
-  _handlerCloseEditForm() {
+  _handleCloseEditForm() {
     this._backpackList.addEventListener('click', e => {
       e.preventDefault();
       if (!e.target.closest('.btn--edit--cancel')) return;
@@ -164,7 +165,7 @@ class View {
     `;
   }
 
-  _handlerOpenEditForm() {
+  _handleOpenEditForm() {
     this._backpackList.addEventListener('click', e => {
       if (!e.target.closest('.btn--list--edit')) return;
       this.closeEditForm();
