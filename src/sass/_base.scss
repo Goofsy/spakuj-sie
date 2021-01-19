@@ -166,28 +166,3 @@ section {
     padding-top: 0.5rem;
   }
 }
-
-// Hidden
-.hidden {
-  position: absolute;
-  visibility: hidden;
-  width: 0;
-  height: 0;
-  opacity: 0;
-  top: 0;
-  left: 0;
-}
-.hidden--btn {
-  position: absolute;
-  visibility: hidden;
-  opacity: 0.1;
-}
-// Error
-.error {
-  border-color: $error-color;
-
-  &:hover,
-  &:focus {
-    border-color: $error-color;
-  }
-}
