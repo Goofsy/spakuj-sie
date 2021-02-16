@@ -55,11 +55,11 @@ const renderAndUpdate = function () {
   View.renderBackpack(model.state.backpackData);
 };
 
-const init = function () {
+// Init
+(function () {
   View.addHandlerInitForm(controlInitForm);
   View.addHandlerBackpackForm(controlAddItem);
   View.addHandlerDeleteItem(controlDeleteItem);
   View.addHandlerEditItem(controlEditItem);
   View.addHandlerCalc(controlCalc);
-};
-init();
+})();
